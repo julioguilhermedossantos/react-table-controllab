@@ -1,5 +1,4 @@
 import  axios  from "axios";
-//Padrão de declaração de Actions
 
 export const FETCH_TASKS_BEGIN = 'FETCH_TASKS_BEGIN';
 export const FETCH_TASKS_SUCCESS = 'FETCH_TASKS_SUCCESS';
@@ -9,9 +8,9 @@ export const fetchTasksBegin = () => ({
   type: FETCH_TASKS_BEGIN
 });
 
-export const fetchTasksSuccess = tasks => ({
+export const fetchTasksSuccess = (tasks) => ({
   type: FETCH_TASKS_SUCCESS,
-  payload: [tasks]
+  payload: {tasks}
 });
 
 export const fetchTasksFailure = error => ({
@@ -20,40 +19,35 @@ export const fetchTasksFailure = error => ({
 });
 
 export function listTasks() {
-
+  //mock call para api
   return dispatch => {
     dispatch(fetchTasksBegin())
     axios.get("https://jsonplaceholder.typicode.com/todos")
                         .then(response => {
-                            console.log(response.data)
-                           return dispatch(fetchTasksSuccess(response.data))
+                          console.log('====================================');
+                          console.log("no action");
+                          console.log(response.data)
+                          console.log('====================================');
+                           return dispatch({
+                            type: FETCH_TASKS_SUCCESS,
+                            payload: response.data
+                          })
                         })
                         .catch(error => {
-                            // dispatch(fetchTasksFailure(error))
-                            console.log(error)
+                            dispatch(fetchTasksFailure(error)) 
                         })
-    // dispatch(fetchTasksBegin());
-    // return fetch("https://jsonplaceholder.typicode.com/todos")
-    // .then(response => response.json())
-    // .then(json => {
-    //   dispatch(fetchTasksSuccess(json.Tasks));
-    //   console.log('====================================');
-    //   console.log(json.Tasks);
-    //   console.log('====================================');
-    //   return json.Tasks;
-    // })
-    //   .catch(error => dispatch(fetchTasksFailure(error)));
-  };
-  }
+            }
 
+    // return dispatch({
+    //             type: FETCH_TASKS_SUCCESS,
+    //             payload: [{
+    //               "userId": 1,
+    //               "id": 1,
+    //               "title": "delectus aut autem",
+    //               "completed": false
+    //             }]
+    //     })
+    // }
 
+}
 
-// function handleErrors(response) {
-//   console.log('====================================');
-//   console.log("erro: "+ response.statusText);
-//   console.log('====================================');
-//   if (!response.ok) {
-//     throw Error(response.statusText);
-//   }
-//   return response;
-// }

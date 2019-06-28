@@ -8,14 +8,13 @@ import { listTasks } from '../actions';
 class App extends Component {
 
   componentDidMount() {
-    this.props.dispatch(listTasks());
-   
+    this.props.dispatch(listTasks()); 
   }
 
   render() {
     const header = [ {Header: "UserId", accessor: "userId"}, {Header: "Id", accessor: "id"}, {Header: "Title", accessor: "title"} ]
     const {tasks} = this.props;
-    console.log("no render"+ tasks)
+    console.log("no render: "+ tasks)
     return (
       <ReactTable columns={header} 
                   data={tasks} 
@@ -27,7 +26,7 @@ class App extends Component {
                   defaultPageSize={5}
                   previousText={"Anterior"}
                    ></ReactTable>
-    );
+     )
   }
 }
 
