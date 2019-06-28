@@ -24,6 +24,7 @@ class App extends Component {
                   ofText={"de"}
                   rowsText={"linhas"}
                   defaultPageSize={5}
+                  filterable
                   previousText={"Anterior"}
                    ></ReactTable>
      )
