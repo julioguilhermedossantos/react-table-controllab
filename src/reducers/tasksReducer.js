@@ -46,11 +46,11 @@ export default function tasksReducer(state = initialState, action)  {
               tasks: []
             }
       
-          default:{
+          default:
             console.log('====================================')
             console.log("state default: " +  state);
             console.log('====================================')
-          }
+          
             return state;
   }
 }
